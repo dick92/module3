@@ -8,39 +8,40 @@ import java.util.List;
 
 public class PhongTroRepository {
     public List<PhongTro> getAllPhongTro() {
-        List<PhongTro> phongTroList = new ArrayList<>();
-        String sql = "SELECT * FROM phong_tro INNER JOIN hinh_thuc ON phong_tro.id_hinhThuc = hinh_thuc.id_hinhThuc";
-
-        DatabaseMetaData DatabaseConnection = null;
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+        List<PhongTro> list = new ArrayList<>();
+        String query = "SELECT p.MaPhong, p.TenNguoiThue, p.SoDienThoai, p.NgayBatDau, ht.TenHinhThuc, p.GhiChu " +
+                "FROM PhongTro p " +
+                "LEFT JOIN HinhThucThanhToan ht ON p.MaHinhThucThanhToan = ht.MaHinhThuc";
+        BaseRepository baseRepository = new BaseRepository();
+        try (Connection conn =baseRepository.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                PhongTro phongTro = new PhongTro(
-                        rs.getInt("id_phong"),
-                        rs.getString("ten"),
-                        rs.getString("sdt"),
-                        rs.getDate("ngayThue"),
-                        rs.getString("tenHinhThuc"),
-                        rs.getString("ghiChu")
-                );
-                phongTroList.add(phongTro);
+                PhongTro phongTro = new PhongTro();
+                phongTro.setMaPhong(rs.getInt("MaPhong"));
+                phongTro.setTenNguoiThue(rs.getString("TenNguoiThue"));
+                phongTro.setSoDienThoai(rs.getString("SoDienThoai"));
+                phongTro.setNgayBatDau(rs.getString("NgayBatDau"));
+                phongTro.setHinhThucThanhToan(rs.getString("TenHinhThuc"));
+                phongTro.setGhiChu(rs.getString("GhiChu"));
+                list.add(phongTro);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return phongTroList;
+        return list;
     }
 
     public void addPhongTro(PhongTro phongTro) {
-        String sql = "INSERT INTO phong_tro (ten, sdt, ngayThue, id_hinhThuc, ghiChu) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO PhongTro (TenNguoiThue, SoDienThoai, NgayBatDau, MaHinhThucThanhToan, GhiChu) " +
+                "VALUES (?, ?, ?, ?, ?)";
         DatabaseMetaData DatabaseConnection = null;
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, phongTro.getTen());
-            stmt.setString(2, phongTro.getSdt());
-            stmt.setDate(3, phongTro.getNgayThue());
-            stmt.setInt(4, phongTro.getId());
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, phongTro.getTenNguoiThue());
+            stmt.setString(2, phongTro.getSoDienThoai());
+            stmt.setString(3, phongTro.getNgayBatDau());
+            stmt.setInt(4, Integer.parseInt(phongTro.getHinhThucThanhToan())); // Chuyển từ ID
             stmt.setString(5, phongTro.getGhiChu());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -48,6 +49,5 @@ public class PhongTroRepository {
         }
     }
 
-    // Phương thức xóa và tìm kiếm có thể được thêm vào đây
-}
 
+}
