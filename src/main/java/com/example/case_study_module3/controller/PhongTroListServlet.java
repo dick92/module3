@@ -19,7 +19,7 @@ import java.util.List;
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             List<PhongTro> phongTroList = phongTroRepository.getAllPhongTro();
             request.setAttribute("phongTroList", phongTroList);
-            request.getRequestDispatcher("/view/phongtro.jsp").forward(request, response);
+            request.getRequestDispatcher("phongtro.jsp").forward(request, response);
         }
     }
 
