@@ -13,23 +13,29 @@ import java.sql.Date;
 
 @WebServlet("/addPhongTro")
 public class AddPhongTroServlet extends HttpServlet {
-    private PhongTroRepository phongTroRepository = new PhongTroRepository();
+    private PhongTroRepository phongTroDAO = new PhongTroRepository();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ten = request.getParameter("ten");
-        String sdt = request.getParameter("sdt");
-        Date ngayThue = Date.valueOf(request.getParameter("ngayThue"));
-        int idHinhThuc = Integer.parseInt(request.getParameter("idHinhThuc"));
+        // Lấy dữ liệu từ form
+        String tenNguoiThue = request.getParameter("tenNguoiThue");
+        String soDienThoai = request.getParameter("soDienThoai");
+        String ngayBatDau = request.getParameter("ngayBatDau");
+        String hinhThucThanhToan = request.getParameter("hinhThucThanhToan");
         String ghiChu = request.getParameter("ghiChu");
 
+        // Tạo đối tượng PhongTro và gán dữ liệu
         PhongTro phongTro = new PhongTro();
-        phongTro.setTen(ten);
-        phongTro.setSdt(sdt);
-        phongTro.setNgayThue(ngayThue);
-        phongTro.setHinhThuc(String.valueOf(idHinhThuc));
+        phongTro.setTenNguoiThue(tenNguoiThue);
+        phongTro.setSoDienThoai(soDienThoai);
+        phongTro.setNgayBatDau(ngayBatDau);
+        phongTro.setHinhThucThanhToan(hinhThucThanhToan);
         phongTro.setGhiChu(ghiChu);
 
-        phongTroRepository.addPhongTro(phongTro);
+
+        phongTroDAO.addPhongTro(phongTro);
+
+
         response.sendRedirect("phongtro");
     }
 }
