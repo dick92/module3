@@ -1,55 +1,55 @@
 package com.example.case_study_module3.model;
 
-import java.sql.Date;
-
 public class PhongTro {
-    private int id;
-    private String ten;
-    private String sdt;
+    private int maPhong;
+    private String tenNguoiThue;
+    private String soDienThoai;
+    private String ngayBatDau;
+    private String hinhThucThanhToan;
+    private String ghiChu;
 
     public PhongTro() {
-
+        this.maPhong = maPhong;
     }
 
-
-    public int getId() {
-        return id;
+    public int getMaPhong() {
+        return maPhong;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMaPhong(int maPhong) {
+        this.maPhong = maPhong;
     }
 
-    public String getTen() {
-        return ten;
+    public String getTenNguoiThue() {
+        return tenNguoiThue;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setTenNguoiThue(String tenNguoiThue) {
+        this.tenNguoiThue = tenNguoiThue;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
-    public Date getNgayThue() {
-        return ngayThue;
+    public String getNgayBatDau() {
+        return ngayBatDau;
     }
 
-    public void setNgayThue(Date ngayThue) {
-        this.ngayThue = ngayThue;
+    public void setNgayBatDau(String ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
     }
 
-    public String getHinhThuc() {
-        return hinhThuc;
+    public String getHinhThucThanhToan() {
+        return hinhThucThanhToan;
     }
 
-    public void setHinhThuc(String hinhThuc) {
-        this.hinhThuc = hinhThuc;
+    public void setHinhThucThanhToan(String hinhThucThanhToan) {
+        this.hinhThucThanhToan = hinhThucThanhToan;
     }
 
     public String getGhiChu() {
@@ -59,19 +59,4 @@ public class PhongTro {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-
-    public PhongTro(int id, String ten, String sdt, Date ngayThue, String hinhThuc, String ghiChu) {
-        this.id = id;
-        this.ten = ten;
-        this.sdt = sdt;
-        this.ngayThue = ngayThue;
-        this.hinhThuc = hinhThuc;
-        this.ghiChu = ghiChu;
-    }
-
-    private Date ngayThue;
-    private String hinhThuc;
-    private String ghiChu;
-
-    // Constructor, getters và setters
 }
